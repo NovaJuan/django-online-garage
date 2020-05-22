@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
-import dj_database_url
 import os
 import django_heroku
 
@@ -25,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'l27zfdf6*anlsaa*-8q-$k(l9xk)l*(3pe^thtifq29=+5jh@='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['damp-refuge-47472.herokuapp.com']
+ALLOWED_HOSTS = ['damp-refuge-47472.herokuapp.com','localhost']
 
 
 # Application definition
@@ -79,18 +78,18 @@ WSGI_APPLICATION = 'onlinegarage.wsgi.application'
 
 DATABASES = {
     # MySQL setup
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'onlinegarage',
-        'USER': 'root',
-        'HOST': '127.0.0.1',
-        'PORT': '3306'
-    }
-    # SQLite setup
     # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'onlinegarage.sql'),
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'onlinegarage',
+    #     'USER': 'root',
+    #     'HOST': '127.0.0.1',
+    #     'PORT': '3306'
     # }
+    # SQLite setup
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
 
 
@@ -140,7 +139,7 @@ MEDIA_URL = '/media/'
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-prod_db = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(prod_db)
+# prod_db = dj_database_url.config(conn_max_age=500)
+# DATABASES['default'].update(prod_db)
 
 django_heroku.settings(locals())
