@@ -1,1 +1,0 @@
-web: python manage.py collectstatic --no-input; gunicorn onlinegarage.wsgi --log-file -
