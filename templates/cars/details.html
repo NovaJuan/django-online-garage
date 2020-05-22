@@ -1,0 +1,60 @@
+{% extends 'layouts/main.html' %}
+
+{% block content %}
+<div class="row my-3">
+  <div class="col-md-7 mx-auto mt-3">
+    <div class="links mb-2">
+      <a href="{%url 'cars:index'%}" class="btn btn-primary btn-sm">Go back</a>
+      <a href="{% url 'cars:remove_car' car.id %}" class="btn btn-danger btn-sm">Delete car</a>
+      <a href="{% url 'cars:update_car' car.id %}" class="btn btn-success btn-sm">Update car</a>
+    </div>
+    <img src="{{ car.photo.url }}" alt="" class="img-fluid">
+    <h1>{{car.name}}</h1>
+    <p class="text-muted">Published: {{car.pub_date}} | Average rating: {{car.avg_rating}}</p>
+
+    <h4>Reviews</h4>
+    {% if car.review_set.all %}
+    {% for review in car.review_set.all %}
+    <div class="card card-body">
+      <p class="mb-0 text-muted">Review by {{review.author}}</p>
+      <small class="text-info mb-2 d-block">{{review.rating}} points of 5</small>
+      <p>{{review.content}}</p>
+      <a href="{% url 'cars:remove_review' car.id review.id %}" class="text-danger">Delete review</a>
+    </div>
+    <hr>
+    {% endfor %}
+    {% else %}
+    <p>No reviews of this car.</p>
+    {% endif %}
+    <h5>Add review</h5>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-danger">
+      {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    <form action="{% url 'cars:reviews' car.id %}" method="POST">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-6">
+            <label for="author">Author</label>
+            <input type="text" name="author" id="author" placeholder="John Doe..." class="form-control">
+          </div>
+          <div class="col-md-6">
+            <label for="rating">Rate (from 1 to 5)</label>
+            <input type="range" value="1" name="rating" id="rating" min="1" max="5" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="content">Review</label>
+        <textarea name="content" id="content" cols="30" rows="4" class="form-control"
+          placeholder="My review..."></textarea>
+      </div>
+      {% csrf_token %}
+      <input type="submit" value="Submit review" class="btn btn-success">
+    </form>
+  </div>
+</div>
+{% endblock %}
