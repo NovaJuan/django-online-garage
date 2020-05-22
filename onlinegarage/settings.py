@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'l27zfdf6*anlsaa*-8q-$k(l9xk)l*(3pe^thtifq29=+5jh@='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['damp-refuge-47472.herokuapp.com','localhost']
 
