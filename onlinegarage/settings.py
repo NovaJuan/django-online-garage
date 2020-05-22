@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
+# import dj_database_url
 import os
 import django_heroku
 
@@ -24,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'l27zfdf6*anlsaa*-8q-$k(l9xk)l*(3pe^thtifq29=+5jh@='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['damp-refuge-47472.herokuapp.com','localhost']
 
