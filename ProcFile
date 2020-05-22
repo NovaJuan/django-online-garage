@@ -1,1 +1,1 @@
-web: gunicorn onlinegarage.wsgi
+web: gunicorn onlinegarage.wsgi --log-file -
